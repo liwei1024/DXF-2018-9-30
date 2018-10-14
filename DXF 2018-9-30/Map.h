@@ -9,8 +9,19 @@ public:
 	ObjectInfo GetObjectInfo(DWORD ObjectPointer);
 	VOID OutputMapObjectsInfo();
 	const char * GetMapName();
-	VOID PickUpAllLoot(void(*PickUpFunction)(ObjectInfo));
-	std::vector<ObjectInfo> SortByDistance(std::vector<ObjectInfo> Objects);
-	VOID AttackMonster(void(*AttackFunction)(ObjectInfo));
+	VOID PickUpAllLoot(int mode);
+	void SortByDistance(std::vector<ObjectInfo>& Objects);
+	VOID AttackMonster(int mode);
+	bool IsOpenDoor();
+	Pos static GetCurrentRoomPos();
+	Pos static GetBossRoomPos();
+	bool IsBossRoom();
+	bool IsHaveMonster();
+	VOID MoveToNextRoom(int mode);
+	bool GetPlayerNpc();
+	void Flop();
+	void StarNextChallenge(int mode);
+	VOID PlayerDispose(int mode);
+	VOID Follow(int mode);
 };
 
