@@ -46,12 +46,12 @@ wstring FormatWstring(const wchar_t *lpcwszFormat, ...)
 bool 删除自身()
 {
 	bool result = true;
-	char FileName[MAX_PATH];
+	wchar_t FileName[MAX_PATH];
 	memset(FileName, 0, MAX_PATH);
 	//获取文件路径
 	GetModuleFileName(NULL, (LPWSTR)FileName, MAX_PATH);
-	char *NewFileName;
-	NewFileName = new char[MAX_PATH];
+	wchar_t *NewFileName;
+	NewFileName = new wchar_t[MAX_PATH];
 	memset(NewFileName, 0, MAX_PATH);
 	//设置文件属性
 	SetFileAttributes((LPCWSTR)NewFileName, FILE_ATTRIBUTE_NORMAL);
@@ -90,8 +90,7 @@ void 青色打印(const char *内容, ...)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);//设置绿色和蓝色相加
 	va_list argList;
-	char buffer[0x500];
-	char szBuffer_Game[0x500] = "Game:";
+	char buffer[0x1024];
 	va_start(argList, 内容);
 	vsprintf_s(buffer, 内容, argList);
 	printf("%s\n", buffer);
@@ -103,8 +102,7 @@ void 黄色打印(const char *内容, ...)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN);//设置红色和绿色相加
 
 	va_list argList;
-	char buffer[0x500];
-	char szBuffer_Game[0x500] = "Game:";
+	char buffer[0x1024];
 	va_start(argList, 内容);
 	vsprintf_s(buffer, 内容, argList);
 	printf("%s\n", buffer);
@@ -115,8 +113,7 @@ void 粉色打印(const char *内容, ...)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE);//设置红色和蓝色相加
 	va_list argList;
-	char buffer[0x500];
-	char szBuffer_Game[0x500] = "Game:";
+	char buffer[0x1024];
 	va_start(argList, 内容);
 	vsprintf_s(buffer, 内容, argList);
 	printf("%s\n", buffer);
@@ -127,8 +124,7 @@ void 红色打印(const char *内容, ...)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);//设置红色
 	va_list argList;
-	char buffer[0x500];
-	char szBuffer_Game[0x500] = "Game:";
+	char buffer[0x1024];
 	va_start(argList, 内容);
 	vsprintf_s(buffer, 内容, argList);
 	printf("%s\n", buffer);
@@ -139,8 +135,7 @@ void 绿色打印(const char *内容, ...)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN);//设置绿色
 	va_list argList;
-	char buffer[0x500];
-	char szBuffer_Game[0x500] = "Game:";
+	char buffer[0x1024];
 	va_start(argList, 内容);
 	vsprintf_s(buffer, 内容, argList);
 	printf("%s\n", buffer);
@@ -261,7 +256,7 @@ VOID mouseDoubleClick(INT s)
 	Sleep(50 + createRandom(0, 10));
 }
 
-BOOL getKeyStatus(INT keyCode)
+bool getKeyStatus(INT keyCode)
 {
 	if (GetKeyState(keyCode) < 0) {
 		return TRUE;
@@ -288,6 +283,7 @@ VOID keyDown(INT keyCode)
 {
 	if (getKeyStatus(keyCode) == FALSE) {
 		keybd_event(keyCode, getSCan(keyCode), 0, 0);
+		Sleep(100);
 	}
 }
 
@@ -295,15 +291,15 @@ VOID keyUp(INT keyCode)
 {
 	if (getKeyStatus(keyCode) == TRUE) {
 		keybd_event(keyCode, getSCan(keyCode), KEYEVENTF_KEYUP, 0);
+		Sleep(100);
 	}
 }
 
 VOID doKeyPress(INT keyCode, INT s)
 {
 	keyDown(keyCode);
-	Sleep(s + createRandom(0, 10));
+	//Sleep(s + createRandom(200, 300));
 	keyUp(keyCode);
-	Sleep(50 + createRandom(0, 10));
 }
 
 bool 远程CALL(int CALL_Address, bool async)
@@ -325,13 +321,40 @@ std::string PosToString(Pos pos)
 }
 
 
-DWORD GetSystemTime()
+int GetTime()
 {
 	time_t tt = time(NULL);
-	return (DWORD)tt;
+	return (int)tt;
 }
 
+void 还原键状态()
+{
+	if (getKeyStatus(VK_NUMPAD1) == true)
+	{
+		keyUp(VK_NUMPAD1);
+	}
+	if (getKeyStatus(VK_NUMPAD3) == true)
+	{
+		keyUp(VK_NUMPAD3);
+	}
+	if (getKeyStatus(VK_NUMPAD2) == true)
+	{
+		keyUp(VK_NUMPAD2);
+	}
+	if (getKeyStatus(VK_NUMPAD5) == true)
+	{
+		keyUp(VK_NUMPAD5);
+	}
+}
 
-
-
-
+bool VectorFindString(vector<string> list,string str)
+{
+	for (size_t i = 0; i < list.size(); i++)
+	{
+		if (list[i] == str)
+		{
+			return true;
+		}
+	}
+	return false;
+}

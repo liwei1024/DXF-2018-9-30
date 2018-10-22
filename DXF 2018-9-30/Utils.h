@@ -22,6 +22,8 @@ bool EnableDebugPrivilege(bool bEnable);
 int createRandom(int min, int max);
 char * unicodeToAnsi(const wchar_t * wstr);
 INT getTime();
+VOID mouseDoubleClick(INT s = 50);
+bool getKeyStatus(INT keyCode);
 VOID keyDown(INT keyCode);
 VOID keyUp(INT keyCode);
 VOID doKeyPress(INT keyCode, INT s = 100);
@@ -29,4 +31,9 @@ bool Ô¶³ÌCALL(int CALL_Address, bool async = true);
 
 std::string PosToString(Pos pos);
 
-DWORD GetSystemTime();
+int GetTime();
+
+void »¹Ô­¼ü×´Ì¬();
+
+bool VectorFindString(std::vector<std::string> list, std::string str);
+

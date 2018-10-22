@@ -21,7 +21,7 @@ struct ObjectInfo
 	DWORD camp;
 	DWORD type;
 	SIZE_T count;
-	DWORD health_point;
+	LONGLONG health_point;
 	Pos pos;
 	const char *name;
 };
@@ -31,6 +31,8 @@ struct MapInfo
 	DWORD end_address;
 	SIZE_T object_count;
 };
+
+
 
 struct TaskInfo
 {
@@ -62,8 +64,8 @@ struct KnapsackInfo
 
 struct AStarMapInfo 
 {
-	DWORD width;
-	DWORD hieght;
+	int width;
+	int height;
 	std::vector<DWORD> room_channel;
 	Pos start_room;
 	Pos end_room;
@@ -79,4 +81,31 @@ struct AStarRoomInfo
 	bool bottom;
 	bool left;
 	bool right;
+};
+
+struct PlayerCount
+{
+	int StartRoomFlag = true;
+	int CountNumber = 0;
+	int PlayerTime = 0;
+	int CountMoney = 0;
+	std::map<const char*, int> LootCount;
+};
+
+struct Config
+{
+	int SkilCode = 70023;
+	int Damage = 1234567;
+};
+
+struct CityInfo {
+	int MaxMapId;
+	int MinMapId;
+	int x;
+	int y;
+};
+
+struct PosObject {
+	Pos RoomPos;
+	Pos RolePos;
 };

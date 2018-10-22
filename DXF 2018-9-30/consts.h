@@ -37,6 +37,8 @@
 #define __地图名称 0x0564D370
 #define __怪物CALL 0x259A110
 #define __角色坐标 0x56266A0
+#define __遍历取值 0x5625550
+#define __区域地址 0x5625550
 
 #define __地图偏移 0xC8
 #define __首地址 0xC0
@@ -48,8 +50,8 @@
 #define __阵营偏移 0x824
 #define __类型偏移 0xA4
 #define __血量偏移 0x3AE4
-#define __坐标偏移 0x1D0
-#define __人物坐标偏移 0xb8
+#define __坐标偏移 0xb8
+#define __人物坐标偏移 0x1D0
 
 #define __名称偏移 0x400
 #define __代码偏移 0x3FC
@@ -64,11 +66,22 @@
 #define __深渊房间Y 0xB88
 #define __宽高偏移 0x2AC
 #define __数组偏移 0x2C0
-#define __角色下标偏移 0xc8
 #define __区域偏移 0xcbc4
 #define __开门偏移 0x118
 //#define __小区域ID偏移 0x1ec
 //#define __大区域ID偏移 0x1e4
 //#define __副本等级偏移 0x204
+#define __角色下标偏移 0x108
+#define __大区域偏移 0x1E4
+#define __小区域偏移 0x1Ec
+#define __角色数量偏移2 0x3c0
+#define __当前角色数量 0xa70
+#define __最大角色数量 0xa78
+
+
+#define 搬砖 1
+#define 剧情 2
+#define 深渊 3
+#define 黄龙 3
 
 

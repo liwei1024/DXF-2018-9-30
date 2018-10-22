@@ -27,7 +27,7 @@ BOOL Process::Run(LPCWSTR lpClass, LPCWSTR lpName)
 		红色打印("取窗口句柄失败 Error Code - < %d >", GetLastError());
 		return false;
 	}
-	ProcessId = GetWindowThreadProcessId(hWnd, &ProcessId);
+	GetWindowThreadProcessId(hWnd, &ProcessId);
 	if (ProcessId == NULL)
 	{
 		红色打印("获取进程ID失败 Error Code - < %d >", GetLastError());
@@ -36,9 +36,12 @@ BOOL Process::Run(LPCWSTR lpClass, LPCWSTR lpName)
 	hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, ProcessId);
 	if (hProcess == NULL)
 	{
-		红色打印("打开失败 Error Code - < %d >", GetLastError());
+		红色打印("打开进程失败 Error Code - < %d >", GetLastError());
 		return false;
 	}
+	绿色打印("hWnd			< %d >", hWnd);
+	红色打印("hProcess		< %d >", hProcess);
+	黄色打印("ProcessId		< %d >", ProcessId);
 	return true;
 }
 
@@ -53,13 +56,13 @@ BOOL Process::ReadMemory(INT baseAddress, LPVOID lpBuffer, INT nSize)
 {
 	SIZE_T lpNumberOfBytesRead;
 	if (ReadProcessMemory(hProcess, (LPCVOID)baseAddress, lpBuffer, (SIZE_T)nSize, &lpNumberOfBytesRead) == FALSE) {
-		printf("读取 %x 内存时失败！\n", baseAddress);
-		system("pause");
+		//printf("读取 %x 内存时失败！\n", baseAddress);
+		//system("pause");
 		return false;
 	}
 	if (lpNumberOfBytesRead != nSize) {
-		printf("读取 %x 内存时实际读取的长度与要读取的长度不一致！\n", baseAddress);
-		system("pause");
+		//printf("读取 %x 内存时实际读取的长度与要读取的长度不一致！\n", baseAddress);
+		//system("pause");
 		return false;
 	}
 	return true;
